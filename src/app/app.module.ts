@@ -7,7 +7,10 @@ import { LoginComponent } from './login/login.component';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { EcommerceService } from './ecommerce.service';
-import { appRoutes } from './home-page/routes';
+import { appRoutes } from './routes';
+import { FormsModule } from '@angular/forms';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+
 
 
 
@@ -18,13 +21,16 @@ import { appRoutes } from './home-page/routes';
     AppComponent,
     HomePageComponent,
     LoginComponent,
+    ShoppingCartComponent,
+
 
   ],
   imports: [
     BrowserModule,
     HttpModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule
 
 
   ],

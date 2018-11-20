@@ -1,0 +1,27 @@
+.pointer {
+  cursor: pointer;
+}
+
+.addToCart {
+  width: 286px;
+  height: 38px;
+  color: white !important;
+
+}
+
+.selected {
+  color: white !important;
+}
+
+a:hover {
+  color: lightgrey !important;
+
+}
+.align {
+  float: right;
+}
+.Qtyno {
+ align-items: center !important;
+ display: inline-flex;
+}
+

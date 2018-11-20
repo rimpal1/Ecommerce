@@ -1,54 +1,35 @@
 
-<ul class="nav nav-tabs">
-         <li class="nav-item">
-            <a class="nav-link active" href="#">Home</a>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">[User Name]</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">My Orders</a>
-              <a class="dropdown-item" href="#">Manage Orders</a>
-              <a class="dropdown-item" href="#">Manage Products</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Logout</a>
-            </div>
-        </li>
-
-        <li style="padding:5px">
-          <a href="#">
-            <img src="https://www.incandescentwaxmelts.com/wp-content/uploads/2016/02/icon-cart-2-1.png" width="30px"height="30px"alt="ShoppingCart" />
-          </a>
-        </li>
-      <li>
-        <a routerLink="/SignUp" routerLinkActive="Active" class="btn btn-info" >SignUp</a>
-      </li>
-
-  </ul>
   <div class="row">
 
-      <div class="col-3" style="padding: 10px"><div class="list-group">
-          <a href="#" class="list-group-item list-group-item-action active">
+      <div class="col-3" style="padding: 10px" ><div class="list-group list-group-item-action pointer" style="padding: 14.3px">
+          <a (click)="filterProducts('All products'); selectedCategory='All products';" [ngClass]="{'active': selectedCategory === 'All products'}" class=" list-group-item active" >
             All products
           </a>
-          <a href="#" class="list-group-item list-group-item-action">Vegetables</a>
-          <a href="#" class="list-group-item list-group-item-action">Dairy</a>
-          <a href="#" class="list-group-item list-group-item-action">Seasoning & spices</a>
-          <a href="#" class="list-group-item list-group-item-action">Breads</a>
-          <a href="#" class="list-group-item list-group-item-action">Fruits</a>
+
+          <a (click)="filterProducts(category); selectedCategory=category;" [ngClass]="{'active': selectedCategory === category}"
+           class="list-group-item list-group-item-action pointer selectedCategory" *ngFor="let category of categories">{{category}} </a>
+
+
         </div>
       </div>
 
-  <div class="col-9" style="padding: 10px; display: inline-flex; flex-wrap: wrap; "><div class="card" style="width: 18rem;" *ngFor="let data of records">
-      <img class="card-img-top" src={{data.image}} alt="ProductImage">
+  <div class="col-9" style="padding: 10px; display: inline-flex; flex-wrap: wrap; "><div class="card" style="width: 18rem; margin: 15px" *ngFor="let data of filteredRecord ">
+      <img class="card-img-top" src={{data.image}} width="220rem" height="180rem" alt="ProductImage">
       <div class="card-body">
-        <h5 class="card-title">{{data.name}}</h5>
+        <h5 class="card-title">{{data.name }}</h5>
         <p class="card-price">Price: {{data.price | currency}}</p>
-        <a href="#" class="btn btn-primary">ADD TO CART  </a>
       </div>
+        <div>
+          <a class="btn btn-primary addToCart" (click)="productAdd(data.name)" *ngIf="addToCart">ADD TO CART </a>
+          <ng-container *ngIf="!addToCart">
+            <button class="btn btn-primary">-</button>
+              <label class="Qtyno"> Qty </label>
+            <button class="btn btn-primary align">+</button>
+          </ng-container>
+
+        </div>
+
     </div>
   </div>
-
-
 
 
