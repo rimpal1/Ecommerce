@@ -20,11 +20,11 @@
         <p class="card-price">Price: {{data.price | currency}}</p>
       </div>
         <div>
-          <a class="btn btn-primary addToCart" (click)="productAdd(data.name)" *ngIf="addToCart">ADD TO CART </a>
-          <ng-container *ngIf="!addToCart">
-            <button class="btn btn-primary">-</button>
-              <label class="Qtyno"> Qty </label>
-            <button class="btn btn-primary align">+</button>
+          <a *ngIf="!data.addToCart" class="btn btn-primary addToCart" (click) = "data.addToCart= !data.addToCart; data.count = data.count+1;" >ADD TO CART </a>
+          <ng-container *ngIf="data.addToCart">
+            <button class="btn btn-primary" (click) = "data.count === 1 ? data.addToCart=false : data.count=data.count-1; " >-</button>
+              <label class="Qtyno"> Qty {{data.count}}</label>
+            <button class="btn btn-primary align" (click)="data.count= data.count+1;">+</button>
           </ng-container>
 
         </div>

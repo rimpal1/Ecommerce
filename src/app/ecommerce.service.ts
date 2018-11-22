@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 
 
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,5 +18,7 @@ export class EcommerceService {
 
   getProducts(): Observable<IProducts[]> {
     return this.http.get<IProducts[]>(this._url);
+
+
   }
 }

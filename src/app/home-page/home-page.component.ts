@@ -13,7 +13,7 @@ export class HomePageComponent implements OnInit {
   public records: IProducts[] = [];
   public filteredRecord = [];
   public allItems = [];
-  addToCart: Boolean = true;
+
 
 
   @Input() selectedItems: number;
@@ -24,6 +24,7 @@ export class HomePageComponent implements OnInit {
   public selectedCategory: String = 'All products';
   public categories: Set<string> = new Set<string>();
 
+
   constructor(private EcomService: EcommerceService) {}
 
   ngOnInit() {
@@ -33,9 +34,16 @@ export class HomePageComponent implements OnInit {
     this.EcomService.getProducts().subscribe((data: IProducts[]) => {
       this.records = data;
       data.forEach((product: IProducts) => {
+
+        // logic to initilize addToCart to false
+        product.addToCart = false;
+        product.count = 0;
+
+
         this.categories.add(product.category);
       });
       this.filteredRecord = this.records;
+      console.log('Hello--->>>>>>' , this.filteredRecord);
     });
   }
   filterProducts(category) {
@@ -58,7 +66,7 @@ export class HomePageComponent implements OnInit {
       this.selectedItem = data;
       this.records.forEach((selectedItem: IProducts) => {
         this.cart.push(selectedItem.name);
-        this.addToCart = this.addToCart ? false : true;
+        // this.addToCart = this.addToCart ? false : true;
         // this.CartCounter = this.CartCounter + 1;
       });
       console.log('added:', this.cart);

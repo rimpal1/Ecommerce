@@ -10,5 +10,7 @@ export interface IProducts {
   price: string;
   instock: string;
   image: string;
+  addToCart: Boolean;
+  count: Number;
 
 }
