@@ -6,6 +6,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 export const appRoutes: Routes =  [
   { path: 'SignUp', component: LoginComponent, pathMatch: 'full'},
   { path: 'Shopping-Cart', component: ShoppingCartComponent},
-  { path: 'Home', component: HomePageComponent}
+  { path: 'Home', component: HomePageComponent},
+  { path: '', component: HomePageComponent},
+  { path: 'Home/:name', component: ShoppingCartComponent}
 
 ];

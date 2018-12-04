@@ -7,12 +7,15 @@ import { Observable } from 'rxjs';
 
 
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class EcommerceService {
 
   private _url = 'http://localhost:8080/products/';
+  public productData: IProducts[] = [];
+
 
   constructor(private http: HttpClient) {}
 
@@ -21,4 +24,6 @@ export class EcommerceService {
 
 
   }
+
+
 }

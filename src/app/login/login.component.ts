@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,5 +16,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
   }
-
+  signUpUser(signUp: NgForm): void {
+    console.log(signUp.value);
+  }
 }

@@ -1,2 +1,10 @@
-<br>
-<h1>Shopping Cart!</h1>
+<form #form = "ngForm">
+  <h1>{{message}}</h1>
+  <input type="text" name = "editedmsg" [(ngModel)] = "editedMsg" >
+  <button (click)="editTheMsg()">changeMsg</button>
+  </form>
+
+
+
+
+

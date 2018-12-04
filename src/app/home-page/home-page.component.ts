@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { EcommerceService } from '../ecommerce.service';
 import { IProducts } from '../products';
-
+import { SyncService } from '../sync.service';
 
 @Component({
   selector: 'app-home-page',
@@ -11,25 +11,25 @@ import { IProducts } from '../products';
 export class HomePageComponent implements OnInit {
   public cart = [];
   public records: IProducts[] = [];
-  public filteredRecord = [];
+  @Input() public filteredRecord = [];
   public allItems = [];
-
-
-
+  editedcount: Number;
   @Input() selectedItems: number;
   @Input() Totalprice = 0;
   @Input() data: IProducts;
-  @Input() CartCounter: Number;
+  editedMsg: any;
+  message: any;
 
   public selectedCategory: String = 'All products';
   public categories: Set<string> = new Set<string>();
 
 
-  constructor(private EcomService: EcommerceService) {}
+  constructor(private EcomService: EcommerceService, private DataSync: SyncService) {}
+
 
   ngOnInit() {
-
-
+   // this.data.currentdata.subscribe(msg => this.msg = msg);
+   this.DataSync.telecast.subscribe(message => this.message = message);
 
     this.EcomService.getProducts().subscribe((data: IProducts[]) => {
       this.records = data;
@@ -38,11 +38,15 @@ export class HomePageComponent implements OnInit {
         // logic to initilize addToCart to false
         product.addToCart = false;
         product.count = 0;
+        product.totalItems = 0;
+       // product.count = this.CartCounter;
 
 
         this.categories.add(product.category);
       });
       this.filteredRecord = this.records;
+
+      this.EcomService.productData = this.filteredRecord;
       console.log('Hello--->>>>>>' , this.filteredRecord);
     });
   }
@@ -66,11 +70,16 @@ export class HomePageComponent implements OnInit {
       this.selectedItem = data;
       this.records.forEach((selectedItem: IProducts) => {
         this.cart.push(selectedItem.name);
-        // this.addToCart = this.addToCart ? false : true;
-        // this.CartCounter = this.CartCounter + 1;
+
       });
       console.log('added:', this.cart);
 
     }
+
+    editTheMsg() {
+      this.DataSync.editMsg(this.editedMsg);
+    }
+
+
 
 }

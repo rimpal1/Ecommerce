@@ -1,29 +1,38 @@
 
+<form #form = "ngForm">
+  <p>{{message}}</p>
+  <input type="text" name = "editedmsg" [(ngModel)] = "editedMsg" >
+  <button (click)="editTheMsg()">changeMsg</button>
+  </form>
+
+
   <div class="row">
 
-      <div class="col-3" style="padding: 10px" ><div class="list-group list-group-item-action pointer" style="padding: 14.3px">
-          <a (click)="filterProducts('All products'); selectedCategory='All products';" [ngClass]="{'active': selectedCategory === 'All products'}" class=" list-group-item active" >
-            All products
+      <div class="col-3" style="padding: 10px" >
+        <div class="list-group list-group-item-action pointer" style="padding: 14.3px">
+          <a (click)="filterProducts('All products'); selectedCategory='All products';" [ngClass]="             {'active': selectedCategory === 'All products'}" class=" list-group-item active" >
+              All products
           </a>
 
           <a (click)="filterProducts(category); selectedCategory=category;" [ngClass]="{'active': selectedCategory === category}"
            class="list-group-item list-group-item-action pointer selectedCategory" *ngFor="let category of categories">{{category}} </a>
-
-
         </div>
       </div>
 
-  <div class="col-9" style="padding: 10px; display: inline-flex; flex-wrap: wrap; "><div class="card" style="width: 18rem; margin: 15px" *ngFor="let data of filteredRecord ">
+  <div class="col-9" style="padding: 10px; display: inline-flex; flex-wrap: wrap; ">
+    <div class="card" style="width: 18rem; margin: 15px" *ngFor="let data of filteredRecord ">
       <img class="card-img-top" src={{data.image}} width="220rem" height="180rem" alt="ProductImage">
       <div class="card-body">
-        <h5 class="card-title">{{data.name }}</h5>
+        <h5 class="card-title">{{ data.name }}</h5>
         <p class="card-price">Price: {{data.price | currency}}</p>
       </div>
         <div>
-          <a *ngIf="!data.addToCart" class="btn btn-primary addToCart" (click) = "data.addToCart= !data.addToCart; data.count = data.count+1;" >ADD TO CART </a>
+
+          <a *ngIf="!data.addToCart" class="btn btn-primary addToCart" (click) = "data.addToCart= !data.addToCart; data.count=0; data.count = data.count+1;" >ADD TO CART </a>
+
           <ng-container *ngIf="data.addToCart">
-            <button class="btn btn-primary" (click) = "data.count === 1 ? data.addToCart=false : data.count=data.count-1; " >-</button>
-              <label class="Qtyno"> Qty {{data.count}}</label>
+            <button class="btn btn-primary" (click) = "data.count === 1 ? data.addToCart=false : data.count=data.count-1;" >-</button>
+              <label class="Qtyno">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qty {{data.count}}</label>
             <button class="btn btn-primary align" (click)="data.count= data.count+1;">+</button>
           </ng-container>
 
@@ -31,5 +40,15 @@
 
     </div>
   </div>
+</div>
+
+
+
+
+
+
+
+
+
 
 
